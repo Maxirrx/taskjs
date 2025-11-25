@@ -5,6 +5,8 @@ export interface Task {
   isfinish: boolean;
 
 }
+
+
 @Injectable({
   providedIn: 'root',
 })
@@ -17,11 +19,15 @@ export class TaskService {
   tasks: Task[] =[];
 
 
-
-
   constructor() {
-    if(localStorage.getItem('tasks')){
-      this.tasks = this.getTasks()
+    const storage = localStorage.getItem('tasks')
+
+    if(storage){
+      try {
+        this.tasks = (JSON.parse(storage));
+      } catch {
+        console.error('erreur parse pas');
+      }
     }
   }
 
@@ -57,6 +63,8 @@ export class TaskService {
       return [];
     }
   }
+
+
   public getTaskById(id: number){
     let tasks = this.getTasks();
     return tasks[id]

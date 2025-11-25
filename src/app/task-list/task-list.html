@@ -1,28 +1,39 @@
-<h2>{{ titre }}</h2>
+<h1 class="flex justify-center font-bold text-white text-[10vh]">{{titre}}</h1>
 
-<input [ngModel]="newTask()" (ngModelChange)="newTask.set($event)">
 
-<button (click)="addTask()">Ajout</button>
 
-<table>
-  <thead>
-  <tr>
-    <th>Nom de la tâche</th>
-    <th>État de la tâche</th>
-    <th>Bouton supprimer</th>
-    <th>Link</th>
+<div class="flex justify-center ">
+  <table class="bg-white ">
+  <thead  class="bg-gray-200 h-[8vh] text-[3vh] text-gray-500  ">
+  <tr class=" ">
+    <th class="px-[5vh] py-[2vh]">Nom de la tâche</th>
+    <th class="px-[5vh] py-[2vh]">Status</th>
+    <th class="px-[5vh] py-[2vh]"></th>
+    <th class="px-[5vh] py-[2vh]"></th>
+    <th>  <div class="flex space-x-2"><input class="w-[30vh] rounded-[1vh] border border-rose-400" [ngModel]="newTask()" (ngModelChange)="newTask.set($event)"> <button class="bg-yellow-400 text-[2vh] text-white p-2 rounded-[1vh] mr-5" (click)="addTask()">Ajout</button></div></th>
   </tr>
   </thead>
-  <tbody>
+  <tbody class="text-center">
     @for (task of tasks; track task; let idx = $index) {
       <tr>
-        <td>{{ task.name }}</td>
-        <td><button (click)="updateTask(idx)">{{ task.isfinish ? "Fini" : "Pas Fini"}}</button></td>
-        <td>
-          <button (click)="deleteTask(idx)">Supprimer</button>
+        <td class=" py-[1.5vh]">{{ task.name }}</td>
+        <td class=" py-[1.5vh]">
+          @if(task.isfinish){
+            <button class="bg-blue-400 text-white p-2 rounded-[1vh]"(click)="updateTask(idx)">Fini</button>
+          } @else {
+            <button class="bg-rose-400 text-white p-2 rounded-[1vh]"(click)="updateTask(idx)">Pas Fini</button>
+          }
+          </td>
+        <td class=" py-[1.5vh]">
+          <button class="bg-red-400 text-white p-2 rounded-[1vh]" (click)="deleteTask(idx)">Supprimer</button>
         </td>
-        <td><a [routerLink]="['/task', idx]">Voir +</a></td>
+        <td class=" py-[1.5vh]"><a  class="bg-purple-400 text-white p-2 rounded-[1vh]" [routerLink]="['/task', idx]">Voir +</a></td>
       </tr>
     }
   </tbody>
 </table>
+
+</div>
+
+
+

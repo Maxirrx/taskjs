@@ -10,16 +10,16 @@ import { Router } from '@angular/router';
   styleUrl: './task-detail.css',
 })
 export class TaskDetail {
-
+  id : number
+  task: Task
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private taskservice: TaskService,
-              public id : number,
-              public task: Task,
+
 
 ) {
-    this.id = Number(this.route.snapshot.paramMap.get('idx'))-1;
+    this.id = Number(this.route.snapshot.paramMap.get('idx'));
     this.task = this.taskservice.getTaskById(this.id)
   }
 
@@ -29,6 +29,7 @@ export class TaskDetail {
   }
 
   public updateTask(id :number) {
+    this.task.isfinish = !this.task.isfinish
     this.taskservice.updateTask(id);
   }
 

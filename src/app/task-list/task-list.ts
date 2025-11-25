@@ -21,7 +21,7 @@ export class TaskList {
 
   constructor( private taskserv: TaskService ) {
     this.tasks = this.taskserv.getTasks();
-
+  console.log(this.tasks);
 
   }
   public addTask(){
