@@ -1,0 +1,28 @@
+<h2>{{ titre }}</h2>
+
+<input [ngModel]="newTask()" (ngModelChange)="newTask.set($event)">
+
+<button (click)="addTask()">Ajout</button>
+
+<table>
+  <thead>
+  <tr>
+    <th>Nom de la tâche</th>
+    <th>État de la tâche</th>
+    <th>Bouton supprimer</th>
+    <th>Link</th>
+  </tr>
+  </thead>
+  <tbody>
+    @for (task of tasks; track task; let idx = $index) {
+      <tr>
+        <td>{{ task.name }}</td>
+        <td><button (click)="updateTask(idx)">{{ task.isfinish ? "Fini" : "Pas Fini"}}</button></td>
+        <td>
+          <button (click)="deleteTask(idx)">Supprimer</button>
+        </td>
+        <td><a [routerLink]="['/task', idx]">Voir +</a></td>
+      </tr>
+    }
+  </tbody>
+</table>
